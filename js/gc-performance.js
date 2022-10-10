@@ -17,7 +17,10 @@ const gcPerformanceLocales = {
       "id": "ID",
       "parcel": "Parcel",
       "sdate": "Sensing date",
-      "n_other_parcels": "Nb. of Parcels"
+      "n_other_parcels": "Nb. of Parcels",
+      "crop": "crop",
+      "entity": "entity",
+      "filters": "Filter"
     },
     "date_format_hint": "YYYY-MM-DD",
   },
@@ -27,7 +30,10 @@ const gcPerformanceLocales = {
       "id": "Nr",
       "parcel": "Feld",
       "sdate": "Aufnahmedatum",
-      "n_other_parcels": "Anzahl Felder"
+      "n_other_parcels": "Anzahl Felder",
+      "crop": "Fruchtart",
+      "entity": "Entität",
+      "filters": "Filter"
     },
     "date_format_hint": "JJJJ-MM-TT",
   },
@@ -111,8 +117,9 @@ Vue.component('gc-performance', {
                <div class="is-flex">
                 <div :id="'desc_' + gcWidgetId" class="gc-is-tertiary" v-show="this.availableOptions.includes('description')">
                   <!-- span class="has-text-weight-bold is-size-7">{{ $t('options.subtitle') }}</span><br -->
-                  <span class="has-text-weight-bold is-size-7">{{ $t('description.parcel') }} {{ $t('description.id') }}: {{this.currentParcelID}}</span><br>
-                  <span class="is-size-7">{{ $t('description.n_other_parcels') }}: {{this.performance.length}}</span><br>
+                  <span class="has-text-weight-bold is-size-7">{{ $t('description.parcel') }} {{ $t('description.id') }}: {{currentParcelID}}</span><br>
+                  <span class="is-size-7">{{ $t('description.n_other_parcels') }}: {{performance.length}}</span><br>
+                  <span class="is-size-7">{{ $t('description.filters') }}: {{ $t('description.crop') }}: {{crop}}, {{ $t('description.entity') }}: {{entity}}</span><br>
                 </div>
 
                 <div class="field-body is-horizontal" style="margin-left: 1em;"

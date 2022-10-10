@@ -22,7 +22,7 @@
     margin: 0 auto;
     text-align: center;
     height: 80px;
-    padding-top: 1em;
+    padding-top: 0em;
 }
 .gc-candlestick-min line {
     stroke: #9D9D9C;
