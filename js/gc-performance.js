@@ -12,7 +12,7 @@
 //language strings
 const gcPerformanceLocales = {
   "en": {
-    "options": { "title": "Performance" },
+    "options": { "title": "Crop performance comparison" },
     "description": { 
       "id": "ID",
       "parcel": "Parcel",
@@ -22,7 +22,7 @@ const gcPerformanceLocales = {
     "date_format_hint": "YYYY-MM-DD",
   },
   "de": {
-    "options": { "title": "Vergleich" },
+    "options": { "title": "Feldvergleich" },
     "description": { 
       "id": "Nr",
       "parcel": "Feld",
@@ -86,6 +86,14 @@ Vue.component('gc-performance', {
     gcWhiteLabel: {
       type: Boolean,
       default: false // true or false
+    },
+    gcCrop: {
+      type: String,
+      default: ""
+    },
+    gcEntity: {
+      type: String,
+      default: ""
     }
   },
   template: `<div :id="gcWidgetId" class="gc-performance" style="max-width: 18.0rem; min-width: 8rem;">       
@@ -102,6 +110,7 @@ Vue.component('gc-performance', {
               <div :class="[gcWidgetCollapsed ? '': 'is-hidden']">
                <div class="is-flex">
                 <div :id="'desc_' + gcWidgetId" class="gc-is-tertiary" v-show="this.availableOptions.includes('description')">
+                  <!-- span class="has-text-weight-bold is-size-7">{{ $t('options.subtitle') }}</span><br -->
                   <span class="has-text-weight-bold is-size-7">{{ $t('description.parcel') }} {{ $t('description.id') }}: {{this.currentParcelID}}</span><br>
                   <span class="is-size-7">{{ $t('description.n_other_parcels') }}: {{this.performance.length}}</span><br>
                 </div>
@@ -251,6 +260,16 @@ Vue.component('gc-performance', {
           return [];
         }
       }
+    },
+    crop: {
+      get: function() {
+        return this.gcCrop;
+      }
+    },
+    entity: {
+      get: function() {
+        return this.gcEntity;
+      }
     }
   },
   i18n: { 
@@ -386,7 +405,7 @@ Vue.component('gc-performance', {
         return;
       }
 
-      let params = "&ranking_date="+ this.selectedDate + "&product=ndvi"; // + "&crop="+this.crop + "&entity=" +this.entity;
+      let params = "&ranking_date="+ this.selectedDate + "&product=ndvi" + "&crop="+this.crop + "&entity=" +this.entity;
     
       //Show requests on the DEBUG console for developers
       console.debug("getRanking()");
@@ -599,7 +618,7 @@ Vue.component('gc-performance', {
                 html += '<tr class="'+'bb-tooltip-'+map[key]+'">'+
                 '<td class="bb-tooltip"><b>'+ map[key] + ':</b></td>'+
                 '<td class="bb-tooltip">'+ d[0].value[key] + '</td></tr>';
-                console.debug(html);
+                //console.debug(html);
               }
               return html;
             }
@@ -611,7 +630,7 @@ Vue.component('gc-performance', {
         transition: {
             duration: 500
         },
-      }).bind(this);
+      });
 
     },
     initDatePickers() {
